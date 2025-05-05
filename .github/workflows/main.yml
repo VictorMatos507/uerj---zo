@@ -1,4 +1,4 @@
- name: CI - Projeto Bilhete
+  name: CI - Projeto Bilhete
 
 on:
   push:
