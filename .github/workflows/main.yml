@@ -1,30 +1,24 @@
-name: Integração Contínua com Minunit
+ name: CI - Projeto Bilhete
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    # Fazer o checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Clonar repositório
+      uses: actions/checkout@v3
 
-    # Preparar o ambiente para rodar aplicações em C
-    - name: Install build essentials
-      run: sudo apt-get install build-essential
+    - name: Instalar GCC
+      run: sudo apt-get update && sudo apt-get install -y gcc
 
-    # Compilar o projeto
-    - name: Build the project
-      run: gcc -o unitario calculadora-imc/test/teste.c
+    - name: Compilar arquivos
+      run: gcc -o test.out bilhete.c main.c test.c
 
-    # Executar o teste
-    - name: Run unit tests
-      run: ./unitario
+    - name: Executar testes
+      run: ./test.out
